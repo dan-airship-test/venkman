@@ -7,7 +7,7 @@ public class User {
     private String[] add;
     private String[] remove;
     private Timestamp timestamp;
-    
+
     User() {}
     public User(String userId) {
         this.userId = userId;
