@@ -1,10 +1,8 @@
 package com.danschmidt.airshipvenkman.service;
 
-import com.danschmidt.airshipvenkman.domain.User;
-import java.util.concurrent.CompletableFuture;
+import com.danschmidt.airshipvenkman.domain.UserTags;
+import com.danschmidt.airshipvenkman.domain.UserUpdate;
 
-public class VenkmanService {
-    public CompletableFuture<User> processTags() throws Exception {
-        return new CompletableFuture<User>();
-    }
+public interface VenkmanService {
+    public UserTags processTags(UserUpdate incoming) throws Exception;
 }
