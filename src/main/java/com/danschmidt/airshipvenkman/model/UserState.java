@@ -1,9 +1,12 @@
 package com.danschmidt.airshipvenkman.model;
 
-import org.apache.catalina.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.function.Predicate;
 
 public class UserState {
     private String user;
@@ -15,8 +18,12 @@ public class UserState {
         user = userName;
     }
 
-    public void addTagReceived(Tag receivedTag) {
-        this.tagsReceived.add(receivedTag);
+    public ArrayList<Tag> getTagsCurrent() {
+        return tagsCurrent;
+    }
+
+    public ArrayList<Tag> getTagsReceived() {
+        return tagsReceived;
     }
 
     public void addTagCurrent(Tag newTag) {
@@ -34,18 +41,15 @@ public class UserState {
     }
 
     public void removeTagCurrent(Tag newTag) {
-        this.tagsCurrent.remove(newTag);
-    }
-
-    public ArrayList<Tag> getTagsCurrent() {
-        return this.tagsCurrent;
+        Predicate<Tag> condition = tag -> tag.getName().equals(newTag.getName());
+        this.tagsCurrent.removeIf(condition);
     }
 
     public String getUser() {
         return this.user;
     }
 
-    public UserState updateState(UserUpdate userUpdate) {
+    public UserState updateState(UserUpdate userUpdate) throws JsonProcessingException {
         for (String add : userUpdate.getAdd()) {
             Tag newTag = new Tag(add,true, userUpdate.getTimestamp());
             this.tagsReceived.add(newTag);
@@ -54,6 +58,9 @@ public class UserState {
             Tag newTag = new Tag(remove,false, userUpdate.getTimestamp());
             this.tagsReceived.add(newTag);
         }
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        System.out.println(ow.writeValueAsString(this.tagsReceived));
+
         return this.generateCurrentState();
     }
 

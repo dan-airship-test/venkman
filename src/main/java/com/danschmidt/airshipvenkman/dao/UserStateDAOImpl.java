@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import javax.servlet.ServletContext;
 
 @Repository
-public class UserTagsDAOImpl implements UserTagsDAO {
+public class UserStateDAOImpl implements UserStateDAO {
     @Autowired
     private ServletContext servletContext;
 
