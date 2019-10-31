@@ -1,7 +1,7 @@
 package com.danschmidt.airshipvenkman.controller;
 
-import com.danschmidt.airshipvenkman.domain.UserTags;
-import com.danschmidt.airshipvenkman.domain.UserUpdate;
+import com.danschmidt.airshipvenkman.model.UserState;
+import com.danschmidt.airshipvenkman.model.UserUpdate;
 import com.danschmidt.airshipvenkman.service.VenkmanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,8 +17,8 @@ public class VenkmanController {
         e.printStackTrace();
     }
     @PostMapping(path = "/api/tags", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserTags tagUser(@RequestBody UserUpdate incoming, HttpServletRequest request) throws Exception {
-        UserTags updated = venkmanService.processTags(incoming);
+    public UserState tagUser(@RequestBody UserUpdate incoming, HttpServletRequest request) throws Exception {
+        UserState updated = venkmanService.processTags(incoming);
         return updated;
     }
 }

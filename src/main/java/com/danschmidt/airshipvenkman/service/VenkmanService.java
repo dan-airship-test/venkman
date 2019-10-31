@@ -1,8 +1,8 @@
 package com.danschmidt.airshipvenkman.service;
 
-import com.danschmidt.airshipvenkman.domain.UserTags;
-import com.danschmidt.airshipvenkman.domain.UserUpdate;
+import com.danschmidt.airshipvenkman.model.UserState;
+import com.danschmidt.airshipvenkman.model.UserUpdate;
 
 public interface VenkmanService {
-    public UserTags processTags(UserUpdate incoming) throws Exception;
+    public UserState processTags(UserUpdate incoming) throws Exception;
 }

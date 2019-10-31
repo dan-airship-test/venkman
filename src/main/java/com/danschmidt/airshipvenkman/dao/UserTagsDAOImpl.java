@@ -1,7 +1,7 @@
 package com.danschmidt.airshipvenkman.dao;
 
-import com.danschmidt.airshipvenkman.domain.UserTags;
-import com.danschmidt.airshipvenkman.domain.UserUpdate;
+import com.danschmidt.airshipvenkman.model.UserState;
+import com.danschmidt.airshipvenkman.model.UserUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import javax.servlet.ServletContext;
@@ -12,19 +12,14 @@ public class UserTagsDAOImpl implements UserTagsDAO {
     private ServletContext servletContext;
 
     @Override
-    public UserTags updateUserTags(UserUpdate user) {
-        UserTags existing = this.getUserTags(user.getUser());
-        if (existing == null) {
-            servletContext.setAttribute(user.getUser(), user);
-        } else {
-
-        }
-        return getUserTags(user.getUser());
+    public UserState set(UserState user) {
+        servletContext.setAttribute(user.getUser(), user);
+        return this.get(user.getUser());
     }
     @Override
-    public UserTags getUserTags(String userName) {
+    public UserState get(String userName) {
         Object userObj = servletContext.getAttribute(userName);
-        UserTags userTags = UserTags.class.cast(userObj);
-        return userTags;
+        UserState userState = UserState.class.cast(userObj);
+        return userState;
     }
 }

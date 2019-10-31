@@ -1,9 +1,9 @@
 package com.danschmidt.airshipvenkman.dao;
 
-import com.danschmidt.airshipvenkman.domain.UserTags;
-import com.danschmidt.airshipvenkman.domain.UserUpdate;
+import com.danschmidt.airshipvenkman.model.UserState;
+import com.danschmidt.airshipvenkman.model.UserUpdate;
 
 public interface UserTagsDAO {
-    public UserTags updateUserTags(UserUpdate user);
-    public UserTags getUserTags(String userName);
+    public UserState set(UserState user);
+    public UserState get(String userName);
 }
