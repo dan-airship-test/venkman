@@ -1,7 +1,6 @@
 package com.danschmidt.airshipvenkman.service;
 
 import com.danschmidt.airshipvenkman.dao.UserTagsDAO;
-import com.danschmidt.airshipvenkman.model.Tag;
 import com.danschmidt.airshipvenkman.model.UserState;
 import com.danschmidt.airshipvenkman.model.UserUpdate;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,23 +15,27 @@ public class VenkmanServiceImpl implements VenkmanService {
     @Autowired
     private UserTagsDAO userTagsDAO;
     @Override
-    public UserState processTags(UserUpdate incoming) throws Exception {
+    public synchronized UserState processTags(UserUpdate incoming) throws Exception {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        // check if user exists yet, create if not.
-        UserState existing = userTagsDAO.get(incoming.getUser());
-        if (existing == null) {
-            existing = userTagsDAO.set(incoming);
-        }
+
         // remove dupes and remove add if a single add and remove for a tag.
         // if tag is included as both `remove` and `add`, remove add and treat as a single remove.
         UserUpdate cleaned = this.removeConflicts(this.removeDupes(incoming));
 
-        // add tags to user state
-        UserState currentState = userTagsDAO.get(incoming.getUser());
-        currentState.updateState(cleaned);
+        // lock on username
+        synchronized(incoming.getUser().intern()) {
+            // check if user exists yet, create if not.
+            UserState existing = userTagsDAO.get(incoming.getUser());
+            if (existing == null) {
+                existing = userTagsDAO.create(incoming.getUser());
+            }
+            // add/remove tags to user state
+            UserState updated = existing.updateState(cleaned);
+            userTagsDAO.set(updated);
+            System.out.println(ow.writeValueAsString(updated));
+            return updated;
 
-        //System.out.println(ow.writeValueAsString(updated));
-        //return updated;
+        }
     }
 
     private UserUpdate removeDupes(UserUpdate incoming) {
@@ -51,14 +54,4 @@ public class VenkmanServiceImpl implements VenkmanService {
         }
         return incoming;
     }
-
-    private UserState addUpdateToState(UserUpdate userUpdate) {
-        UserState currentState = userTagsDAO.get(userUpdate.getUser());
-        for (String add: userUpdate.getAdd()) {
-            Tag newTag = new Tag(userUpdate.getUser(), true, userUpdate.getTimestamp());
-            currentState.addTagReceived(newTag);
-        }
-        return currentState;
-    }
-
 }

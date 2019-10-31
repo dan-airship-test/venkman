@@ -17,7 +17,8 @@ public class VenkmanController {
         e.printStackTrace();
     }
     @PostMapping(path = "/api/tags", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserState tagUser(@RequestBody UserUpdate incoming, HttpServletRequest request) throws Exception {
+    public UserState tagUser(@RequestBody UserUpdate incoming) throws Exception {
+        // TODO: validate format
         UserState updated = venkmanService.processTags(incoming);
         return updated;
     }

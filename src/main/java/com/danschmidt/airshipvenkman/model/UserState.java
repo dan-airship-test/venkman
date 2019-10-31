@@ -7,17 +7,30 @@ import java.util.Comparator;
 
 public class UserState {
     private String user;
-    private ArrayList<Tag> tagsReceived;
-    private ArrayList<Tag> tagsCurrent;
+    private ArrayList<Tag> tagsReceived = new ArrayList<Tag>();
+    private ArrayList<Tag> tagsCurrent = new ArrayList<Tag>();
 
-    UserState() {}
+
+    public UserState(String userName) {
+        user = userName;
+    }
 
     public void addTagReceived(Tag receivedTag) {
         this.tagsReceived.add(receivedTag);
     }
 
     public void addTagCurrent(Tag newTag) {
-        this.tagsCurrent.add(newTag);
+        // TODO: override equals method?
+        Boolean tagExists = false;
+        for (Tag tag : this.tagsCurrent) {
+            if (tag.getName().compareTo(newTag.getName()) == 0) {
+                tagExists = true;
+                break;
+            }
+        }
+        if (!tagExists) {
+            this.tagsCurrent.add(newTag);
+        }
     }
 
     public void removeTagCurrent(Tag newTag) {
@@ -34,7 +47,11 @@ public class UserState {
 
     public UserState updateState(UserUpdate userUpdate) {
         for (String add : userUpdate.getAdd()) {
-            Tag newTag = new Tag(userUpdate.getUser(), true, userUpdate.getTimestamp());
+            Tag newTag = new Tag(add,true, userUpdate.getTimestamp());
+            this.tagsReceived.add(newTag);
+        }
+        for (String remove : userUpdate.getRemove()) {
+            Tag newTag = new Tag(remove,false, userUpdate.getTimestamp());
             this.tagsReceived.add(newTag);
         }
         return this.generateCurrentState();
