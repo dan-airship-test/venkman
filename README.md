@@ -1,4 +1,4 @@
-# venkman
+# venkman spring boot application built with Java 8
 api to tag users
 
 ## Installation
