@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 @SpringBootTest
-class AirshipVenkmanApplicationTests {
+class AirshipVenkmanServiceTests {
     @Autowired
     VenkmanService venkmanService;
 
@@ -58,5 +58,4 @@ class AirshipVenkmanApplicationTests {
             e.printStackTrace();
         }
     }
-
 }

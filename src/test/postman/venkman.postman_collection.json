@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "bb14990e-5f59-4903-a170-947241859bfd",
+		"name": "venkman",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "no-tags",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.user);",
+							"pm.expect(jsonData.user).to.eql(\"tamara7\");",
+							"pm.expect(jsonData.tags.length).to.eql(0);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"tamara7\",\n\"add\": [],\n\"remove\": [],\n\"timestamp\": \"2018-08-10T06:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "minimum",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.user);",
+							"pm.expect(jsonData.user).to.eql(\"my_user\");",
+							"pm.expect(jsonData.tags[0]).to.eql(\"beyhive_member\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"my_user\",\n\"add\": [\"beyhive_member\"],\n\"remove\": [],\n\"timestamp\": \"2018-08-10T05:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove-outdated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.user);",
+							"pm.expect(jsonData.user).to.eql(\"my_user\");",
+							"pm.expect(jsonData.tags[0]).to.eql(\"beyhive_member\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"my_user\",\n\"add\": [],\n\"remove\": [\"beyhive_member\"],\n\"timestamp\": \"2018-08-10T01:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remove-current-add-same",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.user);",
+							"pm.expect(jsonData.user).to.eql(\"my_user\");",
+							"pm.expect(jsonData.tags.length).to.eql(0);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"my_user\",\n\"add\": [\"beyhive_member\"],\n\"remove\": [\"beyhive_member\"],\n\"timestamp\": \"2018-08-10T06:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-duplicate",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.user);",
+							"pm.expect(jsonData.user).to.eql(\"my_user\");",
+							"pm.expect(jsonData.tags[0]).to.eql(\"beyhive_member\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"my_user\",\n\"add\": [\"beyhive_member\", \"beyhive_member\"],\n\"remove\": [],\n\"timestamp\": \"2018-08-10T07:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add-outdated",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.user);",
+							"pm.expect(jsonData.user).to.eql(\"my_user\");",
+							"pm.expect(jsonData.tags[0]).to.eql(\"beyhive_member\");",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"my_user\",\n\"add\": [\"beyhive_member\", \"beyhive_member\"],\n\"remove\": [],\n\"timestamp\": \"2018-08-10T01:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "newuser-add",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"var jsonData = pm.response.json();",
+							"console.log(jsonData.user);",
+							"pm.expect(jsonData.user).to.eql(\"dif_user\");",
+							"pm.expect(jsonData.tags[0]).to.eql(\"squad\");",
+							"pm.expect(jsonData.tags.length).to.eql(1);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"dif_user\",\n\"add\": [\"beyhive_member\", \"beyhive_member\", \"squad\"],\n\"remove\": [\"beyhive_member\"],\n\"timestamp\": \"2018-08-10T01:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "malformed-json",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.response.to.be.json;",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n\"user\": \"tamara7\",\n\"add\": [],\n\"remove\": [],\n\"timestamp\": \"2018-08-10T06:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "missing-field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.response.to.be.json;",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"add\": [],\n\"remove\": [],\n\"timestamp\": \"2018-08-10T06:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "empty-user-field",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1989e8b3-a990-41e9-80cb-1188295821cd",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"pm.response.to.be.json;",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"user\": \"\",\n\"add\": [],\n\"remove\": [],\n\"timestamp\": \"2018-08-10T06:49:04.360Z\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:1917/api/tags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1917",
+					"path": [
+						"api",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
