@@ -1,9 +1,6 @@
 package com.danschmidt.airshipvenkman.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
@@ -22,12 +19,7 @@ public class UserState {
         return tagsCurrent;
     }
 
-    public ArrayList<Tag> getTagsReceived() {
-        return tagsReceived;
-    }
-
     public void addTagCurrent(Tag newTag) {
-        // TODO: override equals method?
         Boolean tagExists = false;
         for (Tag tag : this.tagsCurrent) {
             if (tag.getName().compareTo(newTag.getName()) == 0) {
@@ -58,9 +50,6 @@ public class UserState {
             Tag newTag = new Tag(remove,false, userUpdate.getTimestamp());
             this.tagsReceived.add(newTag);
         }
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        System.out.println(ow.writeValueAsString(this.tagsReceived));
-
         return this.generateCurrentState();
     }
 

@@ -1,25 +1,22 @@
 package com.danschmidt.airshipvenkman.dao;
 
 import com.danschmidt.airshipvenkman.model.UserState;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import javax.servlet.ServletContext;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class UserStateDAOImpl implements UserStateDAO {
-    @Autowired
-    private ServletContext servletContext;
+    ConcurrentHashMap<String, UserState> userState = new ConcurrentHashMap<String, UserState>(100, 0.75f, 100);
 
     @Override
     public UserState set(UserState user) {
-        servletContext.setAttribute(user.getUser(), user);
+        this.userState.put(user.getUser(), user);
         return this.get(user.getUser());
     }
 
     @Override
     public UserState get(String userName) {
-        Object userObj = servletContext.getAttribute(userName);
-        UserState userState = UserState.class.cast(userObj);
+        UserState userState = this.userState.get(userName);
         return userState;
     }
 

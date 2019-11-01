@@ -15,8 +15,7 @@ public class UserUpdate {
     private ArrayList<String> remove;
     @NotNull
     private Timestamp timestamp;
-
-    UserUpdate() {}
+    UserUpdate(){}
     public UserUpdate(String user) {
         this.user = user;
     }
@@ -31,4 +30,5 @@ public class UserUpdate {
     public ArrayList<String> getRemove() { return this.remove; }
     public void setRemove(ArrayList<String> remove) { this.remove = remove; }
     public Timestamp getTimestamp() { return this.timestamp;}
+    public void setTimestamp(Timestamp timestamp) {this.timestamp = timestamp;}
 }

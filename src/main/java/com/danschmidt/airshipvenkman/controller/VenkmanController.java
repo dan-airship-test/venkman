@@ -19,12 +19,11 @@ public class VenkmanController {
     public void handleException(Exception e) {
         e.printStackTrace();
         throw new ResponseStatusException(
-                HttpStatus.BAD_REQUEST, "Error processing request."
+                HttpStatus.BAD_REQUEST, "Unable to process your request."
         );
     }
     @PostMapping(path = "/api/tags", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public CurrentUserState tagUser(@Valid @RequestBody UserUpdate incoming) throws Exception {
-        // TODO: validate format
         CurrentUserState current = venkmanService.processTags(incoming);
         return current;
     }

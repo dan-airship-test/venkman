@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AirshipVenkmanApplication {
 
     public static void main(String[] args) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> System.out.println("Shutdown Hook in effect!")));
         SpringApplication.run(AirshipVenkmanApplication.class, args);
     }
 
